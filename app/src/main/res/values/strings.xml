@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">GWENT</string>
+    <string name="discovery_started">Discovery Started</string>
+    <string name="discovery_starting_failed">Discovery Starting Failed</string>
+    <string name="wifi_on">WiFi On</string>
+    <string name="wifi_off">WiFi Off</string>
+    <string name="host">Host</string>
+    <string name="client">Client</string>
+    <string name="connection_status">Connection Status</string>
+    <string name="wifi_selector">WIFI SELECTOR</string>
+    <string name="discover">DISCOVER</string>
+    <string name="enter_your_message">Enter your message</string>
+    <string name="send">SEND</string>
+</resources>
