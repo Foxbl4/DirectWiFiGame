@@ -30,19 +30,26 @@
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp">
 
-            <Button
+        <Button
                 android:id="@+id/btnWiFiSelector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:text="@string/wifi_selector" />
 
-            <Button
+        <Button
                 android:id="@+id/btnDiscover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:text="@string/discover" />
+
+        <Button
+            android:id="@+id/btnGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="@string/game_test"/>
     </LinearLayout>
 
     <ListView
@@ -59,7 +66,7 @@
 
     <TextView
         android:id="@+id/txtMessage"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp"
@@ -67,6 +74,8 @@
         android:layout_marginBottom="14dp"
         app:layout_constraintTop_toBottomOf="@id/mListView"
         app:layout_constraintBottom_toTopOf="@id/editTxt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/grey10"/>
 
     <EditText

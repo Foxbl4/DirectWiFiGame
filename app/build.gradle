@@ -4,7 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion
+
+/***/
+    compileOptions {
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
+    }
 
     defaultConfig {
         applicationId "com.example.gwent"
@@ -37,7 +43,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
 
     implementation "org.jetbrains.anko:anko-commons:0.10.8"
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
 }

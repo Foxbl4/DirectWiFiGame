@@ -6,11 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.NetworkInfo
-import android.net.wifi.p2p.WifiP2pDevice
 import android.net.wifi.p2p.WifiP2pManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.main_activity.*
+
 
 
 class WifiDirectBroadcastReceiver(
@@ -23,6 +23,7 @@ class WifiDirectBroadcastReceiver(
         val action: String = intent.action.toString()
 
         if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION == action){
+
             val state: Int = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1)
             if (state == WifiP2pManager.WIFI_P2P_STATE_ENABLED){
                 Toast.makeText(context, "Wifi is ON", Toast.LENGTH_SHORT).show()
@@ -37,6 +38,7 @@ class WifiDirectBroadcastReceiver(
                 ) != PackageManager.PERMISSION_GRANTED) {
                 return
             }
+
             mManager.requestPeers(mChannel, mActivity.peerListListener)
 
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION == action){
