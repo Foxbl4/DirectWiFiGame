@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/menu_gradient">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/img_gwent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/gwent_menu"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnSelection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <com.ornach.nobobutton.NoboButton
+            android:id="@+id/btnSelection"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/img_gwent"
+            app:layout_constraintBottom_toTopOf="@id/btnChatTest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="chooseCard"
+
+            app:nb_text="CARD SELECTION "
+            app:nb_textStyle="bold"
+            app:nb_borderColor="#d08e21"
+            app:nb_borderWidth="2dp"
+            app:nb_backgroundColor="#2d8e82"
+            app:nb_focusColor="#186318"
+            app:nb_textColor="#FFF"
+            app:nb_radius="5dp"
+            android:layout_marginBottom="14dp"/>
+
+        <com.ornach.nobobutton.NoboButton
+            android:id="@+id/btnChatTest"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/btnSelection"
+            app:layout_constraintBottom_toTopOf="@id/btnExit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="chatTest"
+
+            app:nb_text="CHAT TEST"
+            app:nb_textStyle="bold"
+            app:nb_borderColor="#d08e21"
+            app:nb_borderWidth="2dp"
+            app:nb_backgroundColor="#2d8e82"
+            app:nb_focusColor="#186318"
+            app:nb_textColor="#FFF"
+            app:nb_radius="5dp"
+            android:layout_marginBottom="14dp"/>
+
+        <com.ornach.nobobutton.NoboButton
+            android:id="@+id/btnExit"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/btnChatTest"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="exit"
+
+            app:nb_text="EXIT"
+            app:nb_textStyle="bold"
+            app:nb_borderColor="#d08e21"
+            app:nb_borderWidth="2dp"
+            app:nb_backgroundColor="#2d8e82"
+            app:nb_focusColor="#186318"
+            app:nb_textColor="#FFF"
+            app:nb_radius="5dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

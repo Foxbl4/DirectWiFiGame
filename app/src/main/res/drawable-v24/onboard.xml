@@ -4,12 +4,13 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="100dp"
 android:layout_height="100dp">
 <item
-    android:drawable="@color/grey20" />
+    android:drawable="@color/green_onboard" />
 
 <item>
+
     <bitmap
-        android:gravity="fill_horizontal|fill_vertical"
-        android:src="@drawable/ks"/>
+        android:gravity="center"
+        android:src="@drawable/gwent"/>
 </item>
 
 </layer-list>

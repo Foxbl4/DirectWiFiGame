@@ -14,4 +14,8 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="OnboardStyle" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/onboard</item>
+    </style>
+
 </resources>

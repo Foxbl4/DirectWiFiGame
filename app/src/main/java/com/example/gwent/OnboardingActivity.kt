@@ -9,7 +9,7 @@ class OnboardingActivity : AppCompatActivity() {
     //Когда приложение будет готово к использованию - переход на главное активити
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, StartActivity::class.java)
         startActivity(intent)
         finish()
     }
