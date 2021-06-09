@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:onClick="chooseCard"
 
-            app:nb_text="CARD SELECTION "
+            app:nb_text="CARD SELECTION"
             app:nb_textStyle="bold"
             app:nb_borderColor="#d08e21"
             app:nb_borderWidth="2dp"

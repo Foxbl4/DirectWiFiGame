@@ -21,10 +21,15 @@
         android:id="@+id/list_text_in_RV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="10dp"
+        android:paddingStart="14dp"
+
         android:textStyle="bold"
         android:fontFamily="@font/gwent_font"
         android:textColor="@android:color/white"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeStepGranularity="2sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

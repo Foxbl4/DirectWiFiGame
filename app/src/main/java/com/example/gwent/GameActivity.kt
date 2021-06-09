@@ -2,126 +2,77 @@ package com.example.gwent
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.AssetManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.gwent.recycler_view.ImageAndTextRecycler
+import com.example.gwent.chat_test.MainActivity
 import kotlinx.android.synthetic.main.game_activity.*
-import java.io.IOException
-
-data class CardsCharacters( var power: Int, var cardAbilityType: String, var legend: Boolean)
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 
 class GameActivity : AppCompatActivity() {
 
-    private val imgList: MutableList<String> = mutableListOf()
     private lateinit var imgRandom: String
 
+    private lateinit var mActivity: MainActivity
     private lateinit var imgPlace: MutableList<ImageView>
     private lateinit var imgImImageView: String
-
+    var totalPower: Int = 0
     private var cardsList: MutableList<CardsCharacters> = mutableListOf()
 
     private var oneCardPower: Int = 0
     private var cardIsLegend: Boolean = false
     private lateinit var list: ArrayList<String>
+    private lateinit var list10: MutableList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_activity)
 
-        imgPlace = mutableListOf(imgCard1,imgCard2,imgCard3,imgCard4,imgCard5,imgCard6,imgCard7)
-        //list = intent.getStringArrayListExtra(LIST) as ArrayList<String>
-/*
-        for (place in list.indices){
-            Glide.with(this).load(Uri.parse("file:///android_asset/sev_cards/${list[place]}")).into(imgPlace[place])
-        }
-*/
+        mActivity = MainActivity()
+        imgPlace = mutableListOf(imgCard1, imgCard2, imgCard3, imgCard4, imgCard5, imgCard6,
+            imgCard7, imgCard8, imgCard9, imgCard10)
 
-        btnDisplayCard.setOnClickListener {
-            val imgArray = getImage(this)
-            imgArray?.forEach { img -> imgList.add(img) }
+        list = intent.getStringArrayListExtra(LIST) as ArrayList<String>
+        list10 = mutableListOf()
+        for (place in imgPlace.indices){
+            imgRandom = list.random()
+            list10.add(imgRandom)
+            Glide.with(this).load(Uri.
+                parse("file:///android_asset/sev_cards/$imgRandom")).into(imgPlace[place])
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                list.removeIf{it.contains(imgRandom)}
+            }
+        }
+
+        btnScoringCard.setOnClickListener {
             cardsList = mutableListOf()
-            txtCards.text = ""
-            cutCards()
-            val totalPower: Int = checkCard(cardsList)
-            powerDisplay(totalPower)
-            txtCards.text = "Total Cards Power is $totalPower"
-
-            val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-            val editor = prefs.edit()
-            editor.putString("string_id", totalPower.toString())
-            editor.apply()
+            cutTenCards()
+            totalPower = checkCard(cardsList)
+            dialogView2(totalPower)
+            PowerActivity.uTotalPower = totalPower
         }
 
-/*
-        btnDisplayCard.setOnClickListener {
-            txtCards.text = ""
-            cardsList = mutableListOf()
-            cutSevenCards()
-            val totalPower: Int = checkCard(cardsList)
-            powerDisplay(totalPower)
-            txtCards.text = "Total Cards Power is $totalPower"
-        }
-*/
         btnChooseCard.setOnClickListener{
             startActivity()
         }
     }
 
-    @Throws(IOException::class)
-    private fun getImage(context: Context): Array<String>? {
-        val assetManager: AssetManager = context.assets
-        return assetManager.list("sev_cards")
+    private fun dialogView2(totalPower: Int) {
+        val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogCustom))
+        builder.setTitle("Total Cards Power is $totalPower")
+        builder.setPositiveButton(android.R.string.yes) { _, _ -> }
+        builder.show()
     }
 
-    private fun cutCards(){
-        for (place in imgPlace.indices) {
-            cardIsLegend = false
-            imgRandom = imgList.random()
-
-            Glide.with(this).load(
-                Uri.parse("file:///android_asset/sev_cards/$imgRandom")
-            ).into(imgPlace[place])
-
-            oneCardPower = imgRandom.substringAfter('!').substringBefore('.')
-                .toInt()
-
-            /**
-             * Отслеживание способности карты и подсчёт легендарных карт, на которые
-             * не действуют эффекты
-             * */
-            if (imgRandom.contains("-") or imgRandom.contains("+")){
-                var cutTempCard = " "
-                if (imgRandom.contains("-")) {
-                    cutTempCard = imgRandom.substringBefore('-')
-                }
-                if (imgRandom.contains("+")) {
-                    cutTempCard = cutTempCard.substringAfter('+')
-                    cardIsLegend = true
-                    if (cutTempCard == " "){
-                        cutTempCard = "o"
-                    }
-                }
-                cardsList.add(CardsCharacters( oneCardPower,cutTempCard, cardIsLegend))
-            }
-            else {
-                cardsList.add(CardsCharacters( oneCardPower,"o", cardIsLegend))
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                imgList.removeIf{it.contains(imgRandom)}
-            }
-        }
-    }
-
-    private fun cutSevenCards(){
-        for (img in list) {
+    private fun cutTenCards(){
+        for (img in list10) {
             cardIsLegend = false
             imgImImageView = img
             oneCardPower = imgImImageView.substringAfter('!').substringBefore('.')
@@ -202,7 +153,7 @@ class GameActivity : AppCompatActivity() {
          * Подсчёт очков от способности командирский рог
          * */
         for (ability in abilityType){
-            if ((rog) and (!ability.legend) and (ability.cardAbilityType!="r")){
+            if ((rog) and (!ability.legend) and (ability.cardAbilityType!="r") and (ability.cardAbilityType != "e")){
                 ability.power *= 2
             }
         }
@@ -232,7 +183,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun startActivity(){
-        val intent = Intent(this, ImageAndTextRecycler::class.java)
+        val intent = Intent(this, RecyclerActivity::class.java)
         startActivity(intent)
         this.finish()
     }

@@ -14,6 +14,11 @@
         app:layout_constraintBottom_toTopOf="@id/cards_recycler_view"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/item_gradient"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="18sp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeStepGranularity="2sp"
+        android:textAlignment="center"
         android:fontFamily="@font/gwent_font"
         android:textColor="@android:color/white"
 

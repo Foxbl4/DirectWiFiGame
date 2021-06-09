@@ -12,5 +12,4 @@ android:layout_height="100dp">
         android:gravity="center"
         android:src="@drawable/gwent"/>
 </item>
-
 </layer-list>

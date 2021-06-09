@@ -5,27 +5,184 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/table"
     tools:context=".GameActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layImage2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_view2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layImageInner2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintEnd_toEndOf="@id/layImage2"
+                app:layout_constraintStart_toStartOf="@id/layImage"
+                app:layout_constraintTop_toTopOf="@id/layImage2">
+
+                <ImageView
+                    android:id="@+id/imgCard21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard22"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard23"
+                    app:layout_constraintStart_toEndOf="@id/imgCard21"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard24"
+                    app:layout_constraintStart_toEndOf="@id/imgCard22"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard25"
+                    app:layout_constraintStart_toEndOf="@id/imgCard23"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard26"
+                    app:layout_constraintStart_toEndOf="@id/imgCard24"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard27"
+                    app:layout_constraintStart_toEndOf="@id/imgCard25"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard28"
+                    app:layout_constraintStart_toEndOf="@id/imgCard26"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard29"
+                    app:layout_constraintStart_toEndOf="@id/imgCard27"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imgCard210"
+                    app:layout_constraintStart_toEndOf="@id/imgCard28"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCard210"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imgCard29"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <Button
-        android:id="@+id/btnDisplayCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Display Cards"
+        android:id="@+id/btnScoringCard"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Scoring"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnChooseCard"
         app:layout_constraintBottom_toTopOf="@id/layImage"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/layImage2"
+        android:background="@drawable/rybin"
+        android:textColor="#FFF"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/btnChooseCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="Choose New Cards"
-        app:layout_constraintStart_toEndOf="@id/btnDisplayCard"
+        app:layout_constraintStart_toEndOf="@id/btnScoringCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/layImage"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/layImage2"
+        android:textColor="#FFF"
+        android:background="@drawable/rybin"
+        android:textStyle="bold"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layImage"
@@ -33,8 +190,27 @@
         android:layout_height="150dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp">
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layImageInner"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintStart_toStartOf="@id/layImage"
+                app:layout_constraintEnd_toEndOf="@id/layImage"
+                app:layout_constraintBottom_toBottomOf="@id/layImage">
 
         <ImageView
             android:id="@+id/imgCard1"
@@ -58,6 +234,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"
             />
 
         <ImageView
@@ -70,6 +247,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"
             />
 
         <ImageView
@@ -82,6 +260,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"
             />
 
         <ImageView
@@ -94,6 +273,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"
             />
 
         <ImageView
@@ -105,7 +285,8 @@
             app:layout_constraintEnd_toStartOf="@id/imgCard7"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"/>
 
         <ImageView
             android:id="@+id/imgCard7"
@@ -113,20 +294,52 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ks"
             app:layout_constraintStart_toEndOf="@id/imgCard6"
+            app:layout_constraintEnd_toStartOf="@id/imgCard8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:id="@+id/imgCard8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ks"
+            app:layout_constraintStart_toEndOf="@id/imgCard7"
+            app:layout_constraintEnd_toStartOf="@id/imgCard9"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:id="@+id/imgCard9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ks"
+            app:layout_constraintStart_toEndOf="@id/imgCard8"
+            app:layout_constraintEnd_toStartOf="@id/imgCard10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:id="@+id/imgCard10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ks"
+            app:layout_constraintStart_toEndOf="@id/imgCard9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:layout_marginStart="5dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:layout_marginTop="20dp"
-        android:id="@+id/txtCards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layImage"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

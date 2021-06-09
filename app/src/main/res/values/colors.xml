@@ -5,5 +5,9 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="grey20">#20808080</color>
     <color name="grey10">#10808080</color>
+    <color name="grey70">#70808080</color>
     <color name="green_onboard">#1f6135</color>
+    <color name="green_menu">#900bab64</color>
+    <color name="green_menu_start">#63d471</color>
+
 </resources>

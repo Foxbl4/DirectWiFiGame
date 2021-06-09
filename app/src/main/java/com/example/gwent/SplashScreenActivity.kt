@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class OnboardingActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
 
     //Когда приложение будет готово к использованию - переход на главное активити
     override fun onCreate(savedInstanceState: Bundle?) {

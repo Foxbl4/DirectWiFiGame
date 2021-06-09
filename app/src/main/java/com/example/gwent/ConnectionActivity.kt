@@ -16,13 +16,19 @@ import android.net.wifi.p2p.WifiP2pManager.PeerListListener
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import kotlinx.android.synthetic.main.connect_activity.*
 import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.main_activity.btnDiscover
+import kotlinx.android.synthetic.main.main_activity.btnGame
+import kotlinx.android.synthetic.main.main_activity.btnWiFiSelector
+import kotlinx.android.synthetic.main.main_activity.mListView
+import kotlinx.android.synthetic.main.main_activity.txtConnect
+import kotlinx.android.synthetic.main.main_activity.txtMessage
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import java.io.IOException
@@ -34,7 +40,8 @@ import java.net.ServerSocket
 import java.net.Socket
 
 
-class MainActivity : AppCompatActivity() {
+class ConnectionActivity : AppCompatActivity() {
+    
     // Этот класс предоставляет основной API для управления всеми аспектами подключения Wi-Fi
     private lateinit var wifiManager: WifiManager
     // Этот класс предоставляет API для управления одноранговой связью Wi-Fi
@@ -55,16 +62,17 @@ class MainActivity : AppCompatActivity() {
     // Переменные для запуска классов клиента, сервера и передачи сообщений
     private lateinit var serverClass: ServerClass
     private lateinit var clientClass: ClientClass
-    private lateinit var sendReceive: SendReceive
+    lateinit var sendReceive: SendReceive
 
 
     private var totalPowerMsg: Int = 0
     private var msg: String = ""
     private var msgList: StringBuilder = StringBuilder()
-
+    var uPower = 0
+    var nUPower = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(R.layout.connect_activity)
 
         initialization()
         buttonsSelector()
@@ -75,6 +83,7 @@ class MainActivity : AppCompatActivity() {
      *  а также инициализация основных компонентов в основном классе MainActivity
      *  */
     private fun initialization(){
+
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             ActivityCompat.requestPermissions(
@@ -105,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         mManager = getSystemService(Context.WIFI_P2P_SERVICE) as WifiP2pManager
         mChannel = mManager.initialize(this, mainLooper, null)
 
-        mReceiver = WifiDirectBroadcastReceiver(mManager, mChannel, this)
+        mReceiver = WifiDirectBroadcastReceiverConnection(mManager, mChannel, this)
         mIntentFilter = IntentFilter()
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION)
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION)
@@ -128,9 +137,8 @@ class MainActivity : AppCompatActivity() {
                 deviceNameArray.add(device.deviceName)
                 deviceArray.add(device)
             }
-            val adapter = ArrayAdapter(
-                applicationContext, android.R.layout.simple_list_item_1, deviceNameArray
-            )
+
+            val adapter = ArrayAdapter(applicationContext, R.layout.list_item, deviceNameArray)
             mListView.adapter = adapter
         }
         if (peers.isEmpty()) {
@@ -155,14 +163,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
         registerReceiver(mReceiver, mIntentFilter)
-
-        //val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        //totalPowerMsg = prefs.getString("string_id", 0.toString())!!.toInt()
-
-        //txtMessage.text = totalPowerMsg.toString()
     }
 
     override fun onPause() {
@@ -170,6 +174,13 @@ class MainActivity : AppCompatActivity() {
         unregisterReceiver(mReceiver)
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        totalPowerMsg = PowerActivity.uTotalPower
+        txtMessage.text = totalPowerMsg.toString()
+        uPower = PowerActivity.uTotalPower
+
+    }
     /**
      * Обработчик всех кнопок в пользовательском интерфейсе
      * */
@@ -188,10 +199,8 @@ class MainActivity : AppCompatActivity() {
         /**Поиск доступных для соединения устройств*/
         btnDiscover.setOnClickListener {
 
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED){
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                 return@setOnClickListener
             }
             mManager.discoverPeers(mChannel, object : WifiP2pManager.ActionListener {
@@ -215,11 +224,10 @@ class MainActivity : AppCompatActivity() {
                 mManager.connect(mChannel, config, object : WifiP2pManager.ActionListener {
 
                     override fun onSuccess() {
-                        Toast.makeText(
-                            applicationContext,
-                            "Connected to " + device.deviceName,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(applicationContext,
+                            "Connected to " + device.deviceName, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@ConnectionActivity, RecyclerActivity::class.java)
+                        startActivity(intent)
                     }
 
                     override fun onFailure(p0: Int) {
@@ -229,34 +237,27 @@ class MainActivity : AppCompatActivity() {
                 })
             }
 
-        /**Отправка сообщения по нажатию кнопки Send*/
-        btnSend.setOnClickListener {
-            if (editTxt.length() != 0){
-                doAsync {
-                    //val msg: String = totalPowerMsg.toString()
-                        msg = editTxt.text.toString()
-                        txtMessage.text = msgList.append("$msg\n")
-                        sendReceive.write(msg.toByteArray())
-                    }
-            }
-            else {
-                toast("Пожалуйста введите сообщение")
-            }
-
-            val view = this.currentFocus
-            view?.let { v ->
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                imm?.hideSoftInputFromWindow(v.windowToken, 0)
-            }
-
-            editTxt.text.clear()
-        }
-
         btnGame.setOnClickListener {
-            val intent = Intent(this@MainActivity, GameActivity::class.java)
-            startActivity(intent)
-            this.onStop()
+            doAsync {
+                sendReceive.write(totalPowerMsg.toString().toByteArray())
+            }
+            nUPower = PowerActivity.nUTotalPower
+            when {
+                uPower > nUPower -> {
+                    Toast.makeText(applicationContext,
+                        "Поздравляю, вы выиграли со счётом $uPower:$nUPower!", Toast.LENGTH_LONG).show()
+                }
+                uPower == nUPower -> {
+                    Toast.makeText(applicationContext,
+                        "Ничья! Счёт $uPower:$nUPower", Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    Toast.makeText(applicationContext,
+                        "К сожалению вы проиграли со счётом $uPower:$nUPower!" , Toast.LENGTH_LONG).show()
+                }
+            }
         }
+
     }
 
 
@@ -265,7 +266,7 @@ class MainActivity : AppCompatActivity() {
      * SendReceive, в котором происходит передача сообщений, запуск сокета
      * */
     inner class ServerClass : Thread() {
-        lateinit var  mSocket: Socket
+        private lateinit var  mSocket: Socket
         private lateinit var serverSocket: ServerSocket
 
         override fun run() {
@@ -287,12 +288,9 @@ class MainActivity : AppCompatActivity() {
         when (message.what) {
             MESSAGE_READ -> {
                 val readBuff = message.obj as ByteArray
-                var tempMsgStr = ""
-                tempMsg.add(String(readBuff, 0, message.arg1))
-                for (str in tempMsg)
-                    tempMsgStr = str
-                msgList.append("$tempMsgStr\n")
-                txtMessage.text = msgList
+                val tempMsgStr = String(readBuff, 0, message.arg1)
+                txtMessage.text = tempMsgStr
+                PowerActivity.nUTotalPower = tempMsgStr.toInt()
             }
         }
         true
@@ -346,7 +344,7 @@ class MainActivity : AppCompatActivity() {
      * и приёма сообщений
      * */
     inner class ClientClass(hostAddress: InetAddress): Thread(){
-        var mSocket: Socket = Socket()
+        private var mSocket: Socket = Socket()
         private var hostAdd: String = hostAddress.hostAddress
 
         override fun run() {
@@ -364,9 +362,8 @@ class MainActivity : AppCompatActivity() {
         val tempMsg: MutableList<String> = mutableListOf()
             private const val POWER = "power"
             fun launch2(context: Context, power: Int) {
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(context, ConnectionActivity::class.java)
                 intent.putExtra(POWER, power)
             }
-
     }
 }

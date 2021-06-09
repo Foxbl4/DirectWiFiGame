@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gwent.recycler_view.ImageAndTextRecycler
+import com.example.gwent.chat_test.MainActivity
 import kotlin.system.exitProcess
 
 class StartActivity: AppCompatActivity() {
@@ -15,7 +15,7 @@ class StartActivity: AppCompatActivity() {
     }
 
     fun chooseCard(view: View?){
-        val intent = Intent(this, ImageAndTextRecycler::class.java)
+        val intent = Intent(this, ConnectionActivity::class.java)
         startActivity(intent)
     }
 

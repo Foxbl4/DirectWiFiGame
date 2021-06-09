@@ -13,10 +13,10 @@ import kotlinx.android.synthetic.main.main_activity.*
 
 
 
-class WifiDirectBroadcastReceiver(
+class WifiDirectBroadcastReceiverConnection(
     private var mManager: WifiP2pManager,
     private var mChannel: WifiP2pManager.Channel,
-    private var mActivity: MainActivity
+    private var mActivity: ConnectionActivity
 ) : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
